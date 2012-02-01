@@ -36,4 +36,5 @@ gem 'koala'
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'heroku'
 end
