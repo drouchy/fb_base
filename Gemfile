@@ -31,7 +31,7 @@ gem 'rails', '3.0.3'
 
 gem 'haml'
 gem 'haml-rails'
-gem 'koala'
+gem 'koala', '1.3.0'
 
 group :development, :test do
   gem 'rspec'
