@@ -29,7 +29,7 @@ class FacebookController < ApplicationController
     end
 
     def facebook_auth
-      Rails.logger.error(FACEBOOK_APP_ID)
+      Rails.logger.error("#{FACEBOOK_APP_ID} -- #{request.cookies.inspect}")
       @oauth = Koala::Facebook::OAuth.new(FACEBOOK_APP_ID, FACEBOOK_SECRET_KEY)
       if fb_user_info = @oauth.get_user_info_from_cookie(request.cookies)
         @graph = Koala::Facebook::GraphAPI.new(fb_user_info['access_token'])
