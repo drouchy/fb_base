@@ -6,5 +6,5 @@ if File.exist? yml_file
   FACEBOOK_SECRET_KEY = facebook_settings['secret_key']
 else
   FACEBOOK_APP_ID = ENV['FACEBOOK_APP_ID']
-  FACEBOOK_SECRET_KEY = ENV['FACEBOOK_APP_ID']
+  FACEBOOK_SECRET_KEY = ENV['FACEBOOK_SECRET_KEY']
 end
