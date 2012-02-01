@@ -7,7 +7,7 @@ class User
   end
 
   def likes
-    @likes ||= graph.get_connections(uid, 'likes')
+    @likes ||= graph.get_connections(@uid, 'likes')
   end
 
   def likes_by_category
