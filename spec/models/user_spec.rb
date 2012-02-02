@@ -125,7 +125,7 @@ describe User do
     before do
       @wall = [
           {
-            "comments" =>[ {
+            "comments" => {
               "data" =>[
                  {
                     "id" => "1313916041_3251080758583_4279193",
@@ -147,9 +147,9 @@ describe User do
                  }
               ],
               "count" => 2
-           }]
+           }
          } , {
-            "comments" =>[ {
+            "comments" => {
               "data" =>[
                  {
                     "id" => "1313916041_3251080758583_4279193",
@@ -162,20 +162,20 @@ describe User do
                  }
               ],
               "count" => 1
-           }]
+           }
          }
         ]
-      @graph.should_receive(:get_connections).with(1, 'feed').once.and_return(@wall)
+      @graph.should_receive(:get_connections).with(1, 'feed', {:limit => 100}).once.and_return(@wall)
       @ranking = @user.rank_friend(1)
     end
 
     it 'should add an entry for every member with a comment' do
-      @ranking.map{|entry| entry[:name]}.should =~ ['F1', 'F2']
+      @ranking.keys.should =~ ['F1', 'F2']
     end
 
     it 'should count the number total of comments' do
-      search_entry_for_name_in_ranking(@ranking, 'F1')[:nb_comments].should == 2
-      search_entry_for_name_in_ranking(@ranking, 'F2')[:nb_comments].should == 1
+      @ranking['F1'].should == 2
+      @ranking['F2'].should == 1
     end
 
   end

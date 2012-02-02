@@ -52,12 +52,12 @@ describe FacebookController do
 
         context 'one friend selected' do
           it 'should assign the ranking of the friend' do
-            @rank = mock('friends')
-            @user.should_receive(:rank_friend).with('2').and_return(@rank)
+            @ranking = mock('ranking')
+            @user.should_receive(:rank_friend).with('2').and_return(@ranking)
 
             get :rank, :friend => '2'
 
-            assigns[:rank].should == @rank
+            assigns[:ranking].should == @ranking
           end
         end
       end

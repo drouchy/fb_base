@@ -10,8 +10,8 @@
   <h3>Ranking</h3>
 
   <ul>
-    <% @ranking.each do |rank| %>
-      <li><%= rank[:name] %> -- <%= rank[:nb_comments] %> comment(s)</li>
+    <% @ranking.each do |name,nb_comments| %>
+      <li><%= name %> -- <%= nb_comments %> comment(s)</li>
     <% end %>
   </ul>
 <% end %>

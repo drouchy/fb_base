@@ -19,16 +19,19 @@ class User
   end
 
   def rank_friend(friend_id)
-    posts = graph.get_connections(friend_id, 'feed')
-    [
-      {
-          :name => 'F2',
-          :nb_comments => 3
-      },
-      {
-          :name => 'F1',
-          :nb_comments => 30
-      }
-    ]
+    wall = graph.get_connections(friend_id, 'feed', {:limit => 100} )
+
+    comments_entries = wall.map { |entry| entry['comments']}
+
+    ranking = Hash.new(0)
+    comments_entries.each do |comments|
+      if comments['data']
+        comments['data'].each do |comment|
+          ranking[comment['from']['name']] += 1
+        end
+      end
+    end
+
+    ranking
   end
 end
