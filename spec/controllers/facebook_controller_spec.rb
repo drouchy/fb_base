@@ -16,25 +16,39 @@ describe FacebookController do
         @oauth.should_receive(:get_user_info_from_cookie).and_return(user_info)
         Koala::Facebook::GraphAPI.should_receive(:new).with('1234567890').and_return(@graph)
         User.should_receive(:new).and_return(@user)
-        @likes = mock('likes')
-        @user.should_receive(:likes_by_category).and_return(@likes)
-
-        @friends = mock('friends')
-        @user.should_receive(:friends).and_return(@friends)
-
-        get :index
       end
 
-      it do
-        response.should be_success
+      describe 'index' do
+        before do
+          @likes = mock('likes')
+          @user.should_receive(:likes_by_category).and_return(@likes)
+
+          get :index
+        end
+
+        it do
+          response.should be_success
+        end
+
+        it 'should assign likes' do
+          assigns[:likes_by_category].should == @likes
+        end
       end
 
-      it 'should assign likes' do
-        assigns[:likes_by_category].should == @likes
-      end
+      describe 'rank' do
 
-      it 'should assign the friends' do
-        assigns[:friends].should == @friends
+        context 'no friend selected' do
+          before do
+            @friends = mock('friends')
+            @user.should_receive(:friends).and_return(@friends)
+
+            get :rank
+          end
+
+          it 'should assign the friends' do
+            assigns[:friends].should == @friends
+          end
+        end
       end
     end
 

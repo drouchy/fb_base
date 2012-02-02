@@ -7,4 +7,8 @@ module FacebookHelper
       :size => size,
       :onlogin => 'location = "/"'})
   end
+
+  def options_from_friends(friends)
+    friends.sort {|f1, f2| f1['name'] <=> f2['name'] }.map {|friend| [friend['name'], friend['id']]}
+  end
 end

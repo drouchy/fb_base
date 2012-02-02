@@ -101,9 +101,9 @@ describe User do
   describe 'retrieving friends' do
     before do
       @friends = [
-          Friend.new(:id => 1, :name => 'Friend 1') ,
-          Friend.new(:id => 2, :name => 'A Friend'),
-          Friend.new(:id => 3, :name => 'Edouard')
+         { 'id' => 1, 'name' => 'Friend 1' } ,
+         { 'id' => 2, 'name' => 'A Friend' } ,
+         { 'id' => 3, 'name' => 'Edouard' } ,
       ]
       @graph.should_receive(:get_connections).with(@uid, 'friends').once.and_return(@friends)
     end

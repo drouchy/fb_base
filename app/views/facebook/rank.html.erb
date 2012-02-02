@@ -1,0 +1,7 @@
+<h2>Rank your friend</h2>
+
+<%= form_tag("/facebook/rank", :method => "get") do %>
+  <%= select_tag(:friend, options_for_select(options_from_friends(@friends))) %>
+
+  <%= submit_tag("Rank") %>
+<% end %>
