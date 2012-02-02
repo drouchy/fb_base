@@ -14,6 +14,10 @@ class FacebookController < ApplicationController
 
   def rank
     @friends = current_user.friends
+
+    if params[:friend]
+      @rank = current_user.rank_friend(params[:friend])
+    end
   end
 
   protected

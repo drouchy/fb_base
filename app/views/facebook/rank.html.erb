@@ -5,3 +5,13 @@
 
   <%= submit_tag("Rank") %>
 <% end %>
+
+<% if @posts %>
+  <h3>Ranking</h3>
+
+  <ul>
+    <% @posts.each do |post| %>
+      <li><%= post[:name] %> -- <%= post[:nb_comments] %> comment(s)</li>
+    <% end %>
+  </ul>
+<% end %>
