@@ -120,4 +120,63 @@ describe User do
       end
     end
   end
+
+  describe 'ranking friends' do
+    before do
+      @wall = [
+          {
+            "comments" =>[ {
+              "data" =>[
+                 {
+                    "id" => "1313916041_3251080758583_4279193",
+                    "from" => {
+                       "name" => "F1",
+                       "id" => "1313916041"
+                    },
+                    "message" => "....",
+                    "created_time" => "2012-01-31T06:30:09+0000"
+                 },
+                 {
+                    "id" => "1313916041_3251080758583_4279203",
+                    "from" => {
+                       "name" => "F2",
+                       "id" => "1206550528"
+                    },
+                    "message" => "......",
+                    "created_time" => "2012-01-31T06:33:36+0000"
+                 }
+              ],
+              "count" => 2
+           }]
+         } , {
+            "comments" =>[ {
+              "data" =>[
+                 {
+                    "id" => "1313916041_3251080758583_4279193",
+                    "from" => {
+                       "name" => "F1",
+                       "id" => "1313916041"
+                    },
+                    "message" => "....",
+                    "created_time" => "2012-01-31T06:30:09+0000"
+                 }
+              ],
+              "count" => 1
+           }]
+         }
+        ]
+      @graph.should_receive(:get_connections).with(1, 'feed').once.and_return(@wall)
+      @ranking = @user.rank_friend(1)
+    end
+
+    it 'should add an entry for every member with a comment' do
+      @ranking.map{|entry| entry[:name]}.should =~ ['F1', 'F2']
+    end
+
+    it 'should count the number total of comments' do
+      search_entry_for_name_in_ranking(@ranking, 'F1')[:nb_comments].should == 2
+      search_entry_for_name_in_ranking(@ranking, 'F2')[:nb_comments].should == 1
+    end
+
+  end
 end

@@ -4,7 +4,7 @@ class FacebookController < ApplicationController
   before_filter :require_login, :except => :login
 
   helper_method :logged_in?, :current_user
-  
+
   def index
     @likes_by_category = current_user.likes_by_category
   end
@@ -16,7 +16,7 @@ class FacebookController < ApplicationController
     @friends = current_user.friends
 
     if params[:friend]
-      @rank = current_user.rank_friend(params[:friend])
+      @ranking = current_user.rank_friend(params[:friend])
     end
   end
 

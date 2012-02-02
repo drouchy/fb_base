@@ -6,12 +6,12 @@
   <%= submit_tag("Rank") %>
 <% end %>
 
-<% if @posts %>
+<% if @ranking %>
   <h3>Ranking</h3>
 
   <ul>
-    <% @posts.each do |post| %>
-      <li><%= post[:name] %> -- <%= post[:nb_comments] %> comment(s)</li>
+    <% @ranking.each do |rank| %>
+      <li><%= rank[:name] %> -- <%= rank[:nb_comments] %> comment(s)</li>
     <% end %>
   </ul>
 <% end %>

@@ -17,4 +17,18 @@ class User
   def friends
     @friends ||= graph.get_connections(@uid, 'friends')
   end
+
+  def rank_friend(friend_id)
+    posts = graph.get_connections(friend_id, 'feed')
+    [
+      {
+          :name => 'F2',
+          :nb_comments => 3
+      },
+      {
+          :name => 'F1',
+          :nb_comments => 30
+      }
+    ]
+  end
 end
