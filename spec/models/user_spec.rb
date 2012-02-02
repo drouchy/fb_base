@@ -97,4 +97,27 @@ describe User do
       end
     end
   end
+
+  describe 'retrieving friends' do
+    before do
+      @friends = [
+          Friend.new(:id => 1, :name => 'Friend 1') ,
+          Friend.new(:id => 2, :name => 'A Friend'),
+          Friend.new(:id => 3, :name => 'Edouard')
+      ]
+      @graph.should_receive(:get_connections).with(@uid, 'friends').once.and_return(@friends)
+    end
+
+    describe '#friends' do
+      it 'should retrieve the friends via the graph api' do
+        @user.friends.should == @friends
+      end
+
+      it 'should memoize the result after the first call' do
+        friends1 = @user.friends
+        friends2 = @user.friends
+        friends2.should equal(friends1)
+      end
+    end
+  end
 end
