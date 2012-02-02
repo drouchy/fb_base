@@ -19,6 +19,9 @@ describe FacebookController do
         @likes = mock('likes')
         @user.should_receive(:likes_by_category).and_return(@likes)
 
+        @friends = mock('friends')
+        @user.should_receive(:friends).and_return(@friends)
+
         get :index
       end
 
@@ -28,6 +31,10 @@ describe FacebookController do
 
       it 'should assign likes' do
         assigns[:likes_by_category].should == @likes
+      end
+
+      it 'should assign the friends' do
+        assigns[:friends].should == @friends
       end
     end
 
