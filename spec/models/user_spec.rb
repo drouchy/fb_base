@@ -144,9 +144,22 @@ describe User do
                     },
                     "message" => "......",
                     "created_time" => "2012-01-31T06:33:36+0000"
+                 },
+                 {
+                    "id" => "1313916041_3251080758583_4279203",
+                    "from" => {
+                       "name" => "F1",
+                       "id" => "1206550528"
+                    },
+                    "message" => "......",
+                    "created_time" => "2012-01-31T06:33:36+0000"
                  }
               ],
               "count" => 2
+           }
+         } , {
+           "comments" => {
+             "counts" => 0
            }
          } , {
             "comments" => {
@@ -174,7 +187,7 @@ describe User do
     end
 
     it 'should count the number total of comments' do
-      @ranking['F1'].should == 2
+      @ranking['F1'].should == 3
       @ranking['F2'].should == 1
     end
 
